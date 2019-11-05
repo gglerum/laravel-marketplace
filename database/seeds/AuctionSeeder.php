@@ -11,6 +11,8 @@ class AuctionSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+       factory(App\Auction::class, 10)->create()->each(function($auction){
+       		$auction->rubrics()->attach( App\Rubric::all()->random()->id );
+       });
     }
 }

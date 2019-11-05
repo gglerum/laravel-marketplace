@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
     	factory(App\User::class, 10)->create();
-        //$this->call(UsersTableSeeder::class);
+        $this->call(RubricSeeder::class);
+        $this->call(AuctionSeeder::class);
     }
 }

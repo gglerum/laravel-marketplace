@@ -10,4 +10,12 @@ class Auction extends Model
 	use SoftDeletes;
     
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function rubrics(){
+    	return $this->belongsToMany('App\Rubric');
+    }
+
+    public function promoted(){
+    	return $this->hasOne('App\Promotion');
+    }
 }
