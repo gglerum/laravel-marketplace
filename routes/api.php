@@ -17,14 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('advertenties', 'AuctionController')
-->names([
-	'update' => 'auctions.update',
-	'destroy' => 'auctions.destroy',
-	'index' => 'auctions.index',
-	'show' => 'auctions.show',
-	'store' => 'auctions.store'
-])
+Route::apiResource('auctions', 'AuctionController')
 ->parameters([
 	'advertenties'=>'auction'
 ]);

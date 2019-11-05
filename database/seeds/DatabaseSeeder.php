@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     	factory(App\User::class, 10)->create();
         $this->call(RubricSeeder::class);
         $this->call(AuctionSeeder::class);
+        $this->call(BidSeeder::class);
     }
 }

@@ -25,17 +25,7 @@ class RubricController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Rubric::with('children')->has('parent', '=', 'null')->get();
     }
 
     /**
@@ -71,17 +61,6 @@ class RubricController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Rubric $rubric)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Rubric  $rubric
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rubric $rubric)
     {
         //
     }
