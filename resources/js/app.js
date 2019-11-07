@@ -6,14 +6,14 @@ import App from './components/main.vue'
 import store from './store'
 
 import RubricsList from './components/rubrics-list.vue' 
+import View from './components/view.vue' 
   
 Vue.use(VueRouter);   
 Vue.use(BootstrapVue);
-
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+  
 const routes = [
 	{ path: '/', component: RubricsList, name: 'rubrics' },
+	{ path: '/(.*)', component: View }
 ]    
 
 const router = new VueRouter({

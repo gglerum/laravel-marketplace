@@ -25,7 +25,17 @@ class RubricController extends Controller
      */
     public function index()
     {
-        return Rubric::with('children')->has('parent', '=', 'null')->get();
+        //Limit amount of children to be displayed to five
+        $withChildren = Rubric::with([
+            'children' => function($query){
+                $query->take(5);
+            }
+        ]);
+
+        //Only get the rubrics that are not a child
+        $rubrics = $withChildren->has('parent', '=', 'null')->get();
+
+        return array_chunk( $rubrics->toArray(), 3);
     }
 
     /**
@@ -60,9 +70,17 @@ class RubricController extends Controller
      * @param  \App\Rubric  $rubric
      * @return \Illuminate\Http\Response
      */
-    public function show(Rubric $rubric)
+    public function show($id)
     {
-        //
+        $withChildren = Rubric::with([
+            'children' => function($query){
+                        $query->with('children')->take(5);
+                    },
+            'auctions'
+        ]);
+        $rubric = $withChildren->findOrFail($id);
+
+        return $rubric;
     }
 
     /**

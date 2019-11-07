@@ -26,24 +26,14 @@ const actions = {
     })
   },
   //get single rubric by id
-  get({dispatch, commit, state, getters}, data){
+  get({dispatch, commit, state, getters}, id){
     //check if rubrics are available, else retrieve single post
-    if(!state.all.length) 
-    {
-      return new Promise((resolve, reject)=>{
-        marketplace.getRubric(rubric=>{
-          commit('setRubric', rubric);
-          resolve();
-        }, data.path);
-      });
-    }
-    else
-    {
-      return new Promise((resolve, reject)=>{
-        commit('setRubric', getters.getById(data.id));
+    return new Promise((resolve, reject)=>{
+      marketplace.getRubric(rubric=>{
+        commit('setRubric', rubric);
         resolve();
-      });
-    }
+      }, id);
+    });
   }
 }
 

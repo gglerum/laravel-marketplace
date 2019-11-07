@@ -30,9 +30,9 @@ export default {
     }) 
   }, 
 
-  getRubric(cb, path) {
-    if(path){
-      const promise = axios.get(this.options.weblogApi.categories + '?path=' + path)
+  getRubric(cb, id) {
+    if(id){
+      const promise = axios.get(`/api/rubrics/${id}`)
       return promise.then(response => {
         _rubric = response.data
         cb(_rubric);
