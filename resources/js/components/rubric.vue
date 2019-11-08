@@ -7,7 +7,7 @@
 			<b-card-title>Advertenties voor {{rubric.title}}</b-card-title>
 			<b-list-group>
 				<b-list-group-item v-for="auction in rubric.auctions" :key="auction.id">
-					{{auction.title}}
+					<router-link :to="auction.path" append>{{auction.title}}</router-link>
 				</b-list-group-item>
 			</b-list-group>
 		</b-card>

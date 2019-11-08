@@ -2,6 +2,7 @@ import axios from 'axios';
 
 var _rubrics = []
 var _rubric = null
+var _advert = null
  
 export default {
   // _fetchPosts(cb, category_id){
@@ -38,6 +39,26 @@ export default {
         cb(_rubric);
       }) 
     }
-    //setTimeout(() => cb(_categories.find(category=>data.id&&category.id==data.id || data.path&&category.path==data.path)), 100)
   },
+
+  getAdvert(cb, id) {
+    if(id){
+      const promise = axios.get(`/api/auctions/${id}`)
+      return promise.then(response => {
+        _advert = response.data
+        cb(_advert);
+      }) 
+    }
+  },
+
+  postBid(cb, data){
+      const promise = axios.post(
+        `/api/auctions/${data.id}/bid`,
+        data.data
+      );
+      return promise.then(response => {
+        _advert = response.data
+        cb(_advert);
+      }) 
+  }
 }

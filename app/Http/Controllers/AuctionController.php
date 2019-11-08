@@ -13,7 +13,7 @@ class AuctionController extends Controller
         $request = request();
 
         $validateData = $request->validate([
-            'title' => 'required|unique:auctions|max:255',
+            'title' => 'required|max:255',
             'description' => 'required',
             'text' => 'required',
             'address' => [
@@ -72,7 +72,24 @@ class AuctionController extends Controller
      */
     public function show($id)
     {
-        //
+        return Auction::with(['bids'=>function($query){
+            $query->with('user');
+        },'user'])->findOrFail($id);
+    }
+
+    public function bid($id){
+        $request = request();
+
+        if($request->bid){
+              Auction::find($id)->bids()->create([
+                    'user_id' => 1000,
+                    'amount' => $request->bid
+                ]);
+        }
+
+        return Auction::with(['bids'=>function($query){
+            $query->with('user');
+        },'user'])->findOrFail($id); 
     }
 
     /**

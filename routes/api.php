@@ -17,9 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('api')->post('/auctions/{id}/bid', 'AuctionController@bid')->name('auctions.bid');
 Route::apiResource('auctions', 'AuctionController')
 ->parameters([
-	'advertenties'=>'auction'
+	'auctions'=>'auction'
 ]);
 
 Route::apiResource('rubrics', 'RubricController')

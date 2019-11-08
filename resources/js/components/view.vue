@@ -21,14 +21,23 @@ export default {
 		};
 	},
 	beforeRouteEnter: (to, from, next) => {
-		let item = to.path.match(/([a-z](?:[0-9]+))\/(?:[a-z0-9\-]+)$/)[1];
-				
 		next(vm =>{
-			vm[item[0] == 'r' ? 'getRubric' : 'getAdvert']( item.substring(1) );
-			vm.showRubric = item[0] == 'r';
+			vm.routeSwitch(to);
 		});
 	},
+	watch: {
+		$route(to, from){
+			this.routeSwitch(to);
+		}
+	},
 	methods: {
+		routeSwitch(to){
+			if(to.path.search(/\/([a-z](?:[0-9]+))\//) > -1){
+				let item = to.path.match(/([a-z](?:[0-9]+))\/(?:[a-z0-9\-]+)$/)[1];
+				this[item[0] == 'r' ? 'getRubric' : 'getAdvert']( item.substring(1) );
+				this.showRubric = item[0] == 'r';
+			}
+		},
 		getRubric(id){
 			this.$store.dispatch('rubrics/get', id);
 		},
