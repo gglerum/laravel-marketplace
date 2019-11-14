@@ -28,6 +28,7 @@
             var cardButton = document.getElementById('card-button');
 
             cardButton.addEventListener('click', function(ev) {
+              ev.preventDefault();
               var clientSecret = cardButton.dataset.secret;
               var cardholderName = document.getElementById('cardholder-name');
 

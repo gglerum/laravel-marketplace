@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/stripe', 'StripeController@testPayment')->name('stripe');
+Route::post('/stripe/update', 'StripeController@update')->name('stripe');
